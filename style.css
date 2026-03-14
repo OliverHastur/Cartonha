@@ -1,0 +1,227 @@
+:root {
+    --apple-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --classic-font: 'Pinyon Script', cursive;
+    --neon-glow: #e714ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--apple-font);
+    cursor: none;
+}
+
+/* CENÁRIO */
+.world-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.sky-sunset {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.farol-barra {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 150vh; /* Sua definição imponente */
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* CURSOR */
+.custom-cursor {
+    width: 35px;
+    height: 35px;
+    background-image: url('assets/cursor-patinha.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+/* INTERFACE */
+.letter-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.glass-card {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    
+    /* LIMITAÇÃO DE ALTURA E SCROLL */
+    max-height: 70vh; /* Ocupa no máximo 70% da altura da tela */
+    overflow-y: auto; /* Cria o scroll apenas se o texto for grande */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: var(--neon-glow) transparent;
+}
+
+/* ESTILIZAÇÃO DO SCROLLBAR (Para Chrome, Edge e Safari) */
+.glass-card::-webkit-scrollbar {
+    width: 6px;
+}
+.glass-card::-webkit-scrollbar-thumb {
+    background: var(--neon-glow);
+    border-radius: 10px;
+}
+
+#typewriter-content {
+    color: white;
+    font-size: 1.2rem; /* Diminuímos levemente (era 1.2) */
+    line-height: 1.6;
+    text-align: left; /* Cartas longas ficam melhores alinhadas à esquerda */
+}
+
+.ian-style { 
+    font-family: var(--classic-font); 
+    font-size: 2rem; /* Diminuímos levemente (era 2.5) */
+    display: block;
+    margin-bottom: 15px;
+}
+.baianes-style { color: var(--neon-glow); font-weight: bold; }
+
+/* ADICIONAIS NECESSÁRIOS */
+.intro-trigger {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    cursor: pointer;
+}
+
+.clapperboard {
+    background: #111;
+    color: white;
+    padding: 20px 40px;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.mia-container {
+    position: fixed;
+    bottom: -300px;
+    right: 1150px;
+    width: 180px;
+    z-index: 20;
+    transition: bottom 1s ease;
+}
+
+.mia-visible { bottom: -80px !important; }
+
+/* Esconde a barra de scroll mas mantém a funcionalidade */
+.glass-card::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Torna a barra invisível */
+}
+
+.glass-card {
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para IE/Edge */
+    
+    /* Garante que o scroll seja suave */
+    scroll-behavior: smooth;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -50px;
+    right: 100%;
+    background: var(--neon-glow);
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 20px 20px 0 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0; /* Começa invisível para o GSAP agir */
+    transform: scale(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.consent-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9); /* Fundo mais escuro para foco */
+    z-index: 200; /* Acima de tudo */
+    display: flex;
+    color: rgb(203, 203, 203);
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-box {
+    text-align: center;
+    border: 1px solid var(--neon-glow);
+}
+
+.confirmation-box h3 {
+    margin-bottom: 20px;
+    color: var(--neon-glow);
+}
+
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-cine {
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    background: var(--neon-glow);
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.btn-cine:hover { transform: scale(1.1); }
